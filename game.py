@@ -96,13 +96,13 @@ def save_game(money_value = None, chip_info = None):
 
 MONEY, CHIPS = load_game()
 
-class game_varialbe: # Game variables
+class game_varia: # Game variables
     def __init__(self):
         self.displayWidth, self.displayHeight = 1200, 700
         self.display = pygame.display.set_mode((self.displayWidth, self.displayHeight), pygame.HWSURFACE | pygame.DOUBLEBUF)
         self.bg_colour = (255, 255, 255)
 
-GV = game_varialbe()
+GV = game_variable()
 
 class game_objects:
     def chip_object(self):
