@@ -96,7 +96,7 @@ def save_game(money_value = None, chip_info = None):
 
 MONEY, CHIPS = load_game()
 
-class game_varia: # Game variables
+class game_variable: # Game variables
     def __init__(self):
         self.displayWidth, self.displayHeight = 1200, 700
         self.display = pygame.display.set_mode((self.displayWidth, self.displayHeight), pygame.HWSURFACE | pygame.DOUBLEBUF)
