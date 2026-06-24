@@ -110,7 +110,8 @@ GV = game_variable()
 
 class game_objects:
     def chip_object(self):
-        pygame.draw.circle(GV.display, (0, 0, 0), GV.chipPos, GV.chipRadius)
+        pygame.draw.circle(GV.display, (255, 255, 255), GV.chipPos, GV.chipRadius)
+        pygame.draw.circle(GV.display, (0, 0, 0), GV.chipPos, (GV.chipRadius-2))
 
 class game_functions:
     def move_chip(self):
