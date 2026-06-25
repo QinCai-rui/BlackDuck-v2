@@ -112,37 +112,35 @@ class game_variable: # Game variables
         self.chipRadius = 50
         self.chipPos = [600, 350]
         self.chipCirclePoints = []
+        self.chipCirclePointsReverse = []
 
         self.count = True
 
-        '''
-        for delta in range (0, 61, 2):
-            print(delta)
+        for delta in range (270, 301, 2):
             self.chipCirclePoints.append([
-                (math.cos(delta) * self.chipRadius) + self.chipPos[0], 
-                (math.sin(delta) * self.chipRadius) + self.chipPos[1]
+                (cosd(delta) * (self.chipRadius)) + (self.chipPos[0]), 
+                (sind(delta) * (self.chipRadius)) + (self.chipPos[1])
             ])
-        for delta in range (0, 61, 2):
-            self.chipCirclePoints.append([
-                (math.cos(delta) * (self.chipRadius - 10)) + self.chipPos[0], 
-                (math.sin(delta) * (self.chipRadius - 10)) + self.chipPos[1]
+        for delta in range (270, 301, 2):
+            self.chipCirclePointsReverse.append([
+                (cosd(delta) * (self.chipRadius - 10)) + (self.chipPos[0]), 
+                (sind(delta) * (self.chipRadius - 10)) + (self.chipPos[1])
             ])
+        
+        self.chipCirclePointsReverse.reverse()
+        for i in self.chipCirclePointsReverse:
+            self.chipCirclePoints.append(i)
         '''
-
-        self.chipCirclePoints.append(((cosd(90) * (self.chipRadius)) + (self.chipPos[0] -1), (sind(90) * (self.chipRadius)) + (self.chipPos[1] -1)))
-        self.chipCirclePoints.append(((cosd(60) * (self.chipRadius)) + (self.chipPos[0] -1), (sind(60) * (self.chipRadius)) + (self.chipPos[1] -1)))
-        self.chipCirclePoints.append(((cosd(60) * (self.chipRadius - 10)) + (self.chipPos[0] -1), (sind(60) * (self.chipRadius - 10)) + (self.chipPos[1] -1)))
-        self.chipCirclePoints.append(((cosd(90) * (self.chipRadius - 10)) + (self.chipPos[0] -1), (sind(90) * (self.chipRadius - 10)) + (self.chipPos[1] -1)))
+        self.chipCirclePoints.append(((cosd(270) * (self.chipRadius)) + (self.chipPos[0] ), (sind(270) * (self.chipRadius)) + (self.chipPos[1] )))
+        self.chipCirclePoints.append(((cosd(300) * (self.chipRadius)) + (self.chipPos[0] +1), (sind(300) * (self.chipRadius)) + (self.chipPos[1] +1)))
+        self.chipCirclePoints.append(((cosd(300) * (self.chipRadius - 10)) + (self.chipPos[0]), (sind(300) * (self.chipRadius - 10)) + (self.chipPos[1])))
+        self.chipCirclePoints.append(((cosd(270) * (self.chipRadius - 10)) + (self.chipPos[0]), (sind(270) * (self.chipRadius - 10)) + (self.chipPos[1])))
+        '''
 
 GV = game_variable()
 
 class game_objects:
     def chip_object(self):
-
-        if GV.count == True:
-            print(GV.chipCirclePoints)
-            print(cosd(30))
-            GV.count = False
 
         pygame.draw.circle(GV.display, (159, 27, 39), GV.chipPos, (GV.chipRadius))
         pygame.draw.polygon(GV.display, (255, 255, 255), GV.chipCirclePoints)
