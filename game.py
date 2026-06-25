@@ -97,6 +97,11 @@ def save_game(money_value = None, chip_info = None):
 
 MONEY, CHIPS = load_game()
 
+def cosd(x):
+    return math.cos(math.radians(x))
+def sind(x):
+    return math.sin(math.radians(x))
+
 class game_variable: # Game variables
     def __init__(self):
         self.displayWidth, self.displayHeight = 1200, 700
@@ -108,19 +113,39 @@ class game_variable: # Game variables
         self.chipPos = [600, 350]
         self.chipCirclePoints = []
 
+        self.count = True
+
+        '''
+        for delta in range (0, 61, 2):
+            print(delta)
+            self.chipCirclePoints.append([
+                (math.cos(delta) * self.chipRadius) + self.chipPos[0], 
+                (math.sin(delta) * self.chipRadius) + self.chipPos[1]
+            ])
+        for delta in range (0, 61, 2):
+            self.chipCirclePoints.append([
+                (math.cos(delta) * (self.chipRadius - 10)) + self.chipPos[0], 
+                (math.sin(delta) * (self.chipRadius - 10)) + self.chipPos[1]
+            ])
+        '''
+
+        self.chipCirclePoints.append(((cosd(90) * (self.chipRadius)) + (self.chipPos[0] -1), (sind(90) * (self.chipRadius)) + (self.chipPos[1] -1)))
+        self.chipCirclePoints.append(((cosd(60) * (self.chipRadius)) + (self.chipPos[0] -1), (sind(60) * (self.chipRadius)) + (self.chipPos[1] -1)))
+        self.chipCirclePoints.append(((cosd(60) * (self.chipRadius - 10)) + (self.chipPos[0] -1), (sind(60) * (self.chipRadius - 10)) + (self.chipPos[1] -1)))
+        self.chipCirclePoints.append(((cosd(90) * (self.chipRadius - 10)) + (self.chipPos[0] -1), (sind(90) * (self.chipRadius - 10)) + (self.chipPos[1] -1)))
+
 GV = game_variable()
 
 class game_objects:
     def chip_object(self):
-        
-        for delta in range (0, 61, 2):
-            GV.chipCirclePoints.append([math.cos(delta) * GV.chipRadius, math.sin(delta) * GV.chipRadius])
-        
-        for delta in range (0, 61, 2):
-            GV.chipCirclePoints.append([math.cos(delta) * (GV.chipRadius - 10), math.sin(delta) * (GV.chipRadius - 10)])
-        
-        pygame.draw.circle(GV.display, (0, 0, 0), GV.chipPos, (GV.chipRadius-2))
-        pygame.draw.arc(GV.display, (255, 255, 255), chipArcPos, math.radians(0), math.radians(14), 10)
+
+        if GV.count == True:
+            print(GV.chipCirclePoints)
+            print(cosd(30))
+            GV.count = False
+
+        pygame.draw.circle(GV.display, (159, 27, 39), GV.chipPos, (GV.chipRadius))
+        pygame.draw.polygon(GV.display, (255, 255, 255), GV.chipCirclePoints)
 
 class game_functions:
     def move_chip(self):
